@@ -1,19 +1,57 @@
-import { View, StyleSheet, Text, StatusBar , TouchableOpacity} from "react-native";
-import {Feather} from '@expo/vector-icons'
+import {
+  View,
+  StyleSheet,
+  Text,
+  StatusBar,
+  TouchableOpacity,
+} from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { MotiView, MotiText } from "moti";
+import { timing } from "react-native-reanimated";
 
 const statusBarHeigth = StatusBar.currentHeight
   ? StatusBar.currentHeight + 22
   : 64;
 
-export default function Header({name}) {
+export default function Header({ name }) {
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.userName}>{name}</Text>
+      <MotiView
+        style={styles.content}
+        from={{
+          translateY: -150,
+          opacity: 0,
+        }}
+        animate={{
+          translateY: 0,
+          opacity: 1,
+        }}
+        transition={{
+          type: "timing",
+          duration: 800,
+          delay: 300,
+        }}
+      >
+        <MotiText 
+        style={styles.userName}
+          from={{
+            translateX: - 300
+          }}
+          animate={{
+            translateX: 0
+          }}
+          transition={{
+            type: "timing",
+            duration: 800,
+            delay: 800,
+          }}
+        >
+          {name}
+          </MotiText>
         <TouchableOpacity activeOpacity={0.9} style={styles.buttonUser}>
-            <Feather name="user" size={27} color="#FFF"/>
+          <Feather name="user" size={27} color="#FFF" />
         </TouchableOpacity>
-      </View>
+      </MotiView>
     </View>
   );
 }
@@ -26,23 +64,23 @@ const styles = StyleSheet.create({
     paddingEnd: 16,
     paddingBottom: 44,
   },
-  content:{
+  content: {
     flex: 1,
-    alignItems:'center',
-    flexDirection:'row',
-    justifyContent:'space-between'
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
-  userName:{
+  userName: {
     fontSize: 18,
     color: "#FFF",
-    fontWeight:'bold'
+    fontWeight: "bold",
   },
-  buttonUser:{
+  buttonUser: {
     width: 44,
     height: 44,
-    backgroundColor:'rgba(255, 255, 255, 0.5)',
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius: 44/2
-  }
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 44 / 2,
+  },
 });
